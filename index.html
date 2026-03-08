@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate BMW Garage</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1>ULTIMATE BMW GARAGE</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#gallery">Gallery</a>
+<a href="#videos">Videos</a>
+<a href="#admin">Admin</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-text">
+<h2>BMW Cars Collection</h2>
+<p>Vertical videos & awesome gallery</p>
+</div>
+</section>
+
+<section id="gallery">
+<h2>Image Gallery</h2>
+<input type="file" id="imageUpload">
+<button onclick="uploadImage()">Upload Image</button>
+<div id="imageGallery" class="gallery"></div>
+</section>
+
+<section id="videos">
+<h2>BMW Videos</h2>
+<input type="file" id="videoUpload">
+<button onclick="uploadVideo()">Upload Video</button>
+<div id="videoGallery" class="video-gallery"></div>
+</section>
+
+<section id="comments">
+<h2>Comments</h2>
+<input type="text" id="commentInput" placeholder="Write comment">
+<button onclick="addComment()">Post</button>
+<ul id="commentList"></ul>
+</section>
+
+<section id="admin">
+<h2>Admin Panel</h2>
+<p>Use upload buttons above to manage content.</p>
+</section>
+
+<footer>
+<p>© 2026 Ultimate BMW Garage</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
