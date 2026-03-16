@@ -1,61 +1,92 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate BMW Garage</title>
-<link rel="stylesheet" href="style.css">
+<title>Camre340 Camera</title>
+<style>
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+.container{
+margin-top:40px;
+}
+video{
+border-radius:12px;
+box-shadow:0 0 15px #00ffcc;
+}
+button{
+padding:12px 25px;
+font-size:18px;
+margin-top:15px;
+cursor:pointer;
+border:none;
+border-radius:8px;
+background:#00ffcc;
+}
+#timer{
+font-size:40px;
+margin-top:20px;
+color:#00ffcc;
+}
+canvas{
+margin-top:20px;
+border-radius:10px;
+}
+</style>
 </head>
+
 <body>
+<div class="container">
+<h2>Camre340 Camera</h2>
+<p>Please allow camera and press start</p>
 
-<header>
-<h1>ULTIMATE BMW GARAGE</h1>
-<nav>
-<a href="#">Home</a>
-<a href="#gallery">Gallery</a>
-<a href="#videos">Videos</a>
-<a href="#admin">Admin</a>
-</nav>
-</header>
+<video id="video" width="320" height="240" autoplay></video>
 
-<section class="hero">
-<div class="hero-text">
-<h2>BMW Cars Collection</h2>
-<p>Vertical videos & awesome gallery</p>
+<div id="timer"></div>
+<br>
+
+<button onclick="startCapture()">Start Camera</button>
+<br>
+
+<canvas id="canvas" width="320" height="240"></canvas>
+<br>
+
+<a id="download"></a>
 </div>
-</section>
 
-<section id="gallery">
-<h2>Image Gallery</h2>
-<input type="file" id="imageUpload">
-<button onclick="uploadImage()">Upload Image</button>
-<div id="imageGallery" class="gallery"></div>
-</section>
+<script>
+let video=document.getElementById("video");
+let canvas=document.getElementById("canvas");
+let timer=document.getElementById("timer");
 
-<section id="videos">
-<h2>BMW Videos</h2>
-<input type="file" id="videoUpload">
-<button onclick="uploadVideo()">Upload Video</button>
-<div id="videoGallery" class="video-gallery"></div>
-</section>
+navigator.mediaDevices.getUserMedia({video:true})
+.then(function(stream){
+video.srcObject=stream;
+});
 
-<section id="comments">
-<h2>Comments</h2>
-<input type="text" id="commentInput" placeholder="Write comment">
-<button onclick="addComment()">Post</button>
-<ul id="commentList"></ul>
-</section>
+function startCapture(){
+let time=5;
+let countdown=setInterval(function(){
+timer.innerHTML=time;
+time--;
+if(time<0){
+clearInterval(countdown);
+takePhoto();
+}
+},1000);
+}
 
-<section id="admin">
-<h2>Admin Panel</h2>
-<p>Use upload buttons above to manage content.</p>
-</section>
+function takePhoto(){
+let context=canvas.getContext("2d");
+context.drawImage(video,0,0,320,240);
+let link=document.getElementById("download");
+link.href=canvas.toDataURL("image/png");
+link.download="photo.png";
+link.innerHTML="Download Photo";
+}
+</script>
 
-<footer>
-<p>© 2026 Ultimate BMW Garage</p>
-</footer>
-
-<script src="script.js"></script>
 </body>
 </html>
